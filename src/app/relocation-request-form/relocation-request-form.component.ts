@@ -7,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrl: './relocation-request-form.component.css'
 })
 export class RelocationRequestFormComponent {
+  relocationRequestForm: any;
+  message: string = '';
 
+  constructor() {}
+
+  onSubmit() {
+    console.log('Form submitted');
+  }
 }
