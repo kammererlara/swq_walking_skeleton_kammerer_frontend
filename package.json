@@ -1,0 +1,22 @@
+{
+  "name": "swq_walking_skeleton_kammerer_frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kammererlara/swq_walking_skeleton_kammerer_frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kammererlara/swq_walking_skeleton_kammerer_frontend/issues"
+  },
+  "homepage": "https://github.com/kammererlara/swq_walking_skeleton_kammerer_frontend#readme",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.13.13"
+  }
+}
