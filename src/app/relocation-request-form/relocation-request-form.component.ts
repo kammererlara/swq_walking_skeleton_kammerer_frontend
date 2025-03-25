@@ -1,18 +1,53 @@
 import { Component } from '@angular/core';
+import { RelocationRequestService } from '../relocation-request.service';
+import {FormsModule} from '@angular/forms';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-relocation-request-form',
-  imports: [],
   templateUrl: './relocation-request-form.component.html',
-  styleUrl: './relocation-request-form.component.css'
+  imports: [
+    FormsModule,
+    NgIf
+  ],
+  styleUrls: ['./relocation-request-form.component.css']
 })
 export class RelocationRequestFormComponent {
-  relocationRequestForm: any;
+  relocationRequestForm = {
+    name: '',
+    datetime: '',
+    fromLocation: '',
+    toLocation: '',
+    floor: '',
+    elevator: false,
+    packagingService: false,
+  };
+
   message: string = '';
 
-  constructor() {}
+  constructor(private relocationRequestService: RelocationRequestService) {}
 
   onSubmit() {
-    console.log('Form submitted');
+    this.relocationRequestService.submitRequest(this.relocationRequestForm).subscribe({
+      next: () => {
+        this.message = 'Request for relocation support successfully created!';
+        this.resetForm();
+      },
+      error: () => {
+        this.message = 'Fehler: Bitte versuchen Sie es erneut.';
+      }
+    });
+  }
+
+  resetForm() {
+    this.relocationRequestForm = {
+      name: '',
+      datetime: '',
+      fromLocation: '',
+      toLocation: '',
+      floor: '',
+      elevator: false,
+      packagingService: false,
+    };
   }
 }

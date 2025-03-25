@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RelocationRequestService {
+  private apiUrl = 'http://localhost:8080';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  submitRequest(request: any): Observable<any> {
-    return new Observable(observer => {
-      observer.complete();
-    });
+  submitRequest(requestData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + '/requestForRelocationSupport', requestData);
   }
 }

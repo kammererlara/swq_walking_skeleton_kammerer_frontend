@@ -15,7 +15,9 @@ describe('RelocationRequestFormComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [FormsModule, RelocationRequestFormComponent],
-      providers: [{ provide: RelocationRequestService, useValue: mockRelocationRequestService }],
+      providers: [
+        { provide: RelocationRequestService, useValue: mockRelocationRequestService }
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RelocationRequestFormComponent);
@@ -31,14 +33,32 @@ describe('RelocationRequestFormComponent', () => {
       datetime: '2025-04-01T08:00',
       fromLocation: 'Wien',
       toLocation: 'Graz',
-      floor: 3,
+      floor: '3',
       elevator: true,
       packagingService: true,
     };
 
+    expect(component.relocationRequestForm).toEqual({
+      name: 'Max Mustermann',
+      datetime: '2025-04-01T08:00',
+      fromLocation: 'Wien',
+      toLocation: 'Graz',
+      floor: '3',
+      elevator: true,
+      packagingService: true,
+    });
+
     component.onSubmit();
 
-    expect(mockRelocationRequestService.submitRequest).toHaveBeenCalledWith(component.relocationRequestForm);
+    expect(mockRelocationRequestService.submitRequest).toHaveBeenCalledWith({
+      name: 'Max Mustermann',
+      datetime: '2025-04-01T08:00',
+      fromLocation: 'Wien',
+      toLocation: 'Graz',
+      floor: '3',
+      elevator: true,
+      packagingService: true,
+    });
 
     expect(component.relocationRequestForm).toEqual({
       name: '',
@@ -61,7 +81,7 @@ describe('RelocationRequestFormComponent', () => {
       datetime: '2025-04-01T08:00',
       fromLocation: 'Wien',
       toLocation: 'Graz',
-      floor: 3,
+      floor: '3',
       elevator: true,
       packagingService: true,
     };
@@ -75,7 +95,7 @@ describe('RelocationRequestFormComponent', () => {
       datetime: '2025-04-01T08:00',
       fromLocation: 'Wien',
       toLocation: 'Graz',
-      floor: 3,
+      floor: '3',
       elevator: true,
       packagingService: true,
     });
