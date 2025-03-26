@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('should load RelocationRequestForm and validate field types', async ({ page }) => {
-    await page.goto('/requestForRelocationSupport');
+    await page.goto('http://localhost:4200');
 
     const datetimeInput = page.locator('input#datetime');
     await expect(datetimeInput).toHaveAttribute('type', 'datetime-local');
@@ -21,7 +21,7 @@ test('should display a success message and clear fields on successful submission
         await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({}) });
     });
 
-    await page.goto('/requestForRelocationSupport');
+    await page.goto('http://localhost:4200');
 
     await page.fill('input#name', 'Max Mustermann');
     await page.fill('input#datetime', '2025-04-01T08:00');
@@ -31,8 +31,7 @@ test('should display a success message and clear fields on successful submission
     await page.check('input#elevator');
     await page.check('input#packagingService');
 
-    const requestPromise = page.waitForRequest('/relocationSupportForm');
-    const alertPromise = page.waitForEvent('dialog');
+    const requestPromise = page.waitForRequest('http://localhost:8080/requestForRelocationSupport');
 
     await page.click('button[type="submit"]');
 
@@ -48,9 +47,8 @@ test('should display a success message and clear fields on successful submission
         packagingService: true,
     });
 
-    const dialog = await alertPromise;
-    expect(dialog.message()).toBe('Request for relocation support successfully created!');
-    await dialog.dismiss();
+    const message = page.locator('.message');
+    await expect(message).toHaveText('Request for relocation support successfully created!');
 
     await expect(page.locator('input#name')).toHaveValue('');
     await expect(page.locator('input#datetime')).toHaveValue('');

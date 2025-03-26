@@ -28,7 +28,19 @@ export class RelocationRequestFormComponent {
   constructor(private relocationRequestService: RelocationRequestService) {}
 
   onSubmit() {
-    this.relocationRequestService.submitRequest(this.relocationRequestForm).subscribe({
+    const relocationRequestForm = {
+      name: this.relocationRequestForm.name,
+      datetime: this.relocationRequestForm.datetime,
+      fromLocation: this.relocationRequestForm.fromLocation,
+      toLocation: this.relocationRequestForm.toLocation,
+      floor: this.relocationRequestForm.floor,
+      elevator: this.relocationRequestForm.elevator,
+      packagingService: this.relocationRequestForm.packagingService,
+    };
+
+    console.log('Object to create:', JSON.stringify(relocationRequestForm, null, 2));
+
+    this.relocationRequestService.submitRequest(relocationRequestForm).subscribe({
       next: () => {
         this.message = 'Request for relocation support successfully created!';
         this.resetForm();
