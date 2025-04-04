@@ -2,56 +2,119 @@
   <h2>Relocation Request Form</h2>
 
   <form #relocationForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
-
     <label for="name">Name:</label>
-    <input type="text" id="name" [(ngModel)]="relocationRequestForm.name" name="name"
-           #name="ngModel" required minlength="3" />
+    <input
+      type="text"
+      id="name"
+      [(ngModel)]="relocationRequestForm.name"
+      name="name"
+      #name="ngModel"
+      required
+      minlength="3"
+    />
     <div class="error-message" *ngIf="name.invalid && name.touched">
       <span *ngIf="name.errors?.['required']">Name ist erforderlich.</span>
-      <span *ngIf="name.errors?.['minlength']">Mindestens 3 Zeichen erforderlich.</span>
+      <span *ngIf="name.errors?.['minlength']"
+        >Mindestens 3 Zeichen erforderlich.</span
+      >
     </div>
 
     <label for="datetime">Date & Time:</label>
-    <input type="datetime-local" id="datetime" [(ngModel)]="relocationRequestForm.datetime" name="datetime"
-           #datetime="ngModel" required />
+    <input
+      type="datetime-local"
+      id="datetime"
+      [(ngModel)]="relocationRequestForm.datetime"
+      name="datetime"
+      #datetime="ngModel"
+      required
+    />
     <div class="error-message" *ngIf="datetime.invalid && datetime.touched">
-      <span *ngIf="datetime.errors?.['required']">Datum und Uhrzeit sind erforderlich.</span>
+      <span *ngIf="datetime.errors?.['required']"
+        >Datum und Uhrzeit sind erforderlich.</span
+      >
     </div>
 
     <label for="fromLocation">From Location:</label>
-    <input type="text" id="fromLocation" [(ngModel)]="relocationRequestForm.fromLocation" name="fromLocation"
-           #fromLocation="ngModel" required />
-    <div class="error-message" *ngIf="fromLocation.invalid && fromLocation.touched">
-      <span *ngIf="fromLocation.errors?.['required']">Startort ist erforderlich.</span>
+    <input
+      type="text"
+      id="fromLocation"
+      [(ngModel)]="relocationRequestForm.fromLocation"
+      name="fromLocation"
+      #fromLocation="ngModel"
+      required
+    />
+    <div
+      class="error-message"
+      *ngIf="fromLocation.invalid && fromLocation.touched"
+    >
+      <span *ngIf="fromLocation.errors?.['required']"
+        >Startort ist erforderlich.</span
+      >
     </div>
 
     <label for="toLocation">To Location:</label>
-    <input type="text" id="toLocation" [(ngModel)]="relocationRequestForm.toLocation" name="toLocation"
-           #toLocation="ngModel" required />
+    <input
+      type="text"
+      id="toLocation"
+      [(ngModel)]="relocationRequestForm.toLocation"
+      name="toLocation"
+      #toLocation="ngModel"
+      required
+    />
     <div class="error-message" *ngIf="toLocation.invalid && toLocation.touched">
-      <span *ngIf="toLocation.errors?.['required']">Zielort ist erforderlich.</span>
+      <span *ngIf="toLocation.errors?.['required']"
+        >Zielort ist erforderlich.</span
+      >
     </div>
 
     <label for="floor">Floor:</label>
-    <input type="number" id="floor" [(ngModel)]="relocationRequestForm.floor" name="floor"
-           #floor="ngModel" required min="0" max="100" />
+    <input
+      type="number"
+      id="floor"
+      [(ngModel)]="relocationRequestForm.floor"
+      name="floor"
+      #floor="ngModel"
+      required
+      min="0"
+      max="100"
+    />
     <div class="error-message" *ngIf="floor.invalid && floor.touched">
-      <span *ngIf="floor.errors?.['required']">Stockwerk ist erforderlich.</span>
-      <span *ngIf="floor.errors?.['min']">Stockwerk muss mindestens 0 sein.</span>
-      <span *ngIf="floor.errors?.['max']">Maximal erlaubtes Stockwerk ist 100.</span>
+      <span *ngIf="floor.errors?.['required']"
+        >Stockwerk ist erforderlich.</span
+      >
+      <span *ngIf="floor.errors?.['min']"
+        >Stockwerk muss mindestens 0 sein.</span
+      >
+      <span *ngIf="floor.errors?.['max']"
+        >Maximal erlaubtes Stockwerk ist 100.</span
+      >
     </div>
 
     <label>
-      <input type="checkbox" id="elevator" [(ngModel)]="relocationRequestForm.elevator" name="elevator" />
+      <input
+        type="checkbox"
+        id="elevator"
+        [(ngModel)]="relocationRequestForm.elevator"
+        name="elevator"
+      />
       Elevator Available
     </label>
 
     <label>
-      <input type="checkbox" id="packagingService" [(ngModel)]="relocationRequestForm.packagingService" name="packagingService" />
+      <input
+        type="checkbox"
+        id="packagingService"
+        [(ngModel)]="relocationRequestForm.packagingService"
+        name="packagingService"
+      />
       Packaging Service
     </label>
 
-    <button type="submit" [disabled]="relocationForm.invalid" [class.active]="!relocationForm.invalid">
+    <button
+      type="submit"
+      [disabled]="relocationForm.invalid"
+      [class.active]="!relocationForm.invalid"
+    >
       Submit Request
     </button>
   </form>

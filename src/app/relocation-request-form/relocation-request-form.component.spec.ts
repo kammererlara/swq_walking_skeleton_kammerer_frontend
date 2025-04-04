@@ -10,13 +10,19 @@ describe('RelocationRequestFormComponent', () => {
   let mockRelocationRequestService: jasmine.SpyObj<RelocationRequestService>;
 
   beforeEach(async () => {
-    mockRelocationRequestService = jasmine.createSpyObj('RelocationRequestService', ['submitRequest']);
+    mockRelocationRequestService = jasmine.createSpyObj(
+      'RelocationRequestService',
+      ['submitRequest'],
+    );
 
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [FormsModule, RelocationRequestFormComponent],
       providers: [
-        { provide: RelocationRequestService, useValue: mockRelocationRequestService }
+        {
+          provide: RelocationRequestService,
+          useValue: mockRelocationRequestService,
+        },
       ],
     }).compileComponents();
 
@@ -26,7 +32,9 @@ describe('RelocationRequestFormComponent', () => {
   });
 
   it('should reset fields and show success message when request succeeds', async () => {
-    mockRelocationRequestService.submitRequest.and.returnValue(of({ status: 200 }));
+    mockRelocationRequestService.submitRequest.and.returnValue(
+      of({ status: 200 }),
+    );
 
     component.relocationRequestForm = {
       name: 'Max Mustermann',
@@ -70,11 +78,15 @@ describe('RelocationRequestFormComponent', () => {
       packagingService: false,
     });
 
-    expect(component.message).toBe('Request for relocation support successfully created!');
+    expect(component.message).toBe(
+      'Request for relocation support successfully created!',
+    );
   });
 
   it('should keep fields and show error message when request fails', async () => {
-    mockRelocationRequestService.submitRequest.and.returnValue(throwError(() => new Error('Network Error')));
+    mockRelocationRequestService.submitRequest.and.returnValue(
+      throwError(() => new Error('Network Error')),
+    );
 
     component.relocationRequestForm = {
       name: 'Max Mustermann',
@@ -88,7 +100,9 @@ describe('RelocationRequestFormComponent', () => {
 
     component.onSubmit();
 
-    expect(mockRelocationRequestService.submitRequest).toHaveBeenCalledWith(component.relocationRequestForm);
+    expect(mockRelocationRequestService.submitRequest).toHaveBeenCalledWith(
+      component.relocationRequestForm,
+    );
 
     expect(component.relocationRequestForm).toEqual({
       name: 'Max Mustermann',
